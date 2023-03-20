@@ -1,0 +1,23 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+    <slot />
+</html>
+<style>
+    .page__header {
+        @apply py-4 mb-1
+    }
+    .page__title {
+        @apply text-5xl font-extrabold text-theme-primary dark:text-theme-dark-primary
+    }
+    .page__desc {
+        @apply text-gray-400
+    }
+</style>
