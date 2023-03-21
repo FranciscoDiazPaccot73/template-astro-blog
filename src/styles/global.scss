@@ -1,12 +1,8 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
+@import './variables';
+
 body {
 	font-family: Verdana, sans-serif;
 	margin: auto;
-	padding: 20px;
 	max-width: 65ch;
 	text-align: left;
 	background-color: #fff;
@@ -66,6 +62,32 @@ blockquote {
 	font-style: italic;
 }
 
+.progress {
+	height: 3px;
+	width: 0%;
+	background-color: #fff;
+	position: fixed;
+	top: 0;
+	left: 0;
+	animation: progress 1s linear;
+	z-index: 1000;
+}
+@keyframes progress {
+	to {
+		background-color: rgb(112, 112, 112);
+		width: 100%;
+	}
+}
+
+:root * {
+  /* Pause the animation */
+  animation-play-state: paused;
+  /* Bind the animation to scroll */
+  animation-delay: calc(var(--scroll) * -1s);
+  /* These last 2 properites clean up overshoot weirdness */
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
 
 @tailwind base;
 /* https://github.com/tailwindlabs/tailwindcss/discussions/2917 */
@@ -74,7 +96,7 @@ blockquote {
 		&.dark {
 			@apply text-gray-200;
 			header, footer {
-				@apply text-gray-400 border-gray-700;
+				@apply text-gray-400 border-gray-100;
 			}
 		}
 	}

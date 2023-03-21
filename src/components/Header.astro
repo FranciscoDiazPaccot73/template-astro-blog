@@ -1,19 +1,18 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
+import { SITE_TITLE, TWITTER, GITHUB } from '../consts';
 ---
 
-<header>
-	<h2>
+<header class="p-5">
+	<h2 class="dark:text-white mb-8">
 		{SITE_TITLE}
-		<img width={720} height={360} src='/placeholder-about.jpg' alt="" />
+		<img class='pt-4' width={720} height={360} src='/placeholder-about.jpg' alt="" />
 	</h2>
-	<nav>
+	<nav class="pb-6 border-b border-gray-500">
 		<HeaderLink href="/">Home</HeaderLink>
 		<HeaderLink href="/blog">Blog</HeaderLink>
-		<HeaderLink href="/about">About</HeaderLink>
-		<HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">Twitter</HeaderLink>
-		<HeaderLink href="https://github.com/withastro/astro" target="_blank">GitHub</HeaderLink>
+		<HeaderLink href={TWITTER} target="_blank">Twitter</HeaderLink>
+		<HeaderLink href={GITHUB} target="_blank">GitHub</HeaderLink>
 	</nav>
 </header>
 <style>
