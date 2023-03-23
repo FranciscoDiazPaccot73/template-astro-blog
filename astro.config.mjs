@@ -5,6 +5,7 @@ import mdx from '@astrojs/mdx';
 import tailwind from '@astrojs/tailwind';
 import image from '@astrojs/image';
 import sitemap from '@astrojs/sitemap';
+import react from '@astrojs/react';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -16,7 +17,7 @@ export default defineConfig({
     config: {
       applyBaseStyles: false
     }
-  }), image()],
+  }), image(), react()],
   vite: {
     plugins: [],
     resolve: {

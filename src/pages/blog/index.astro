@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import DefaultLayout from '../../layouts/DefaultLayout.astro';
 
 import { getCollection } from 'astro:content';
-import BlogDate from '../../components/BlogDate.astro';
+import Selector from '../../components/Selector';
 
 const dataPosts = await getCollection('blog');
 
@@ -36,35 +36,7 @@ listOfYears.sort((a,b) => b - a)
 <DefaultLayout>
 	<BaseLayout>
 		<section class="p-5">
-			<ul class="flex gap-8 flex-col">
-				{listOfYears.map(year => (
-					<p id={year} class="text-xl font-bold text-gray-300">{year}</p>
-					<>
-						{posts.get(year) && posts.get(year).map((post: { data: { pubDate: any; title: unknown; description: unknown; image: string | null | undefined; }; slug: any; }) => {
-							const description = post.data.description ?? '';
-
-							return (
-								<li class="grid overflow-hidden w-full items-center py-4 px-1 h-28 grid-cols-custom gap-2">
-									<BlogDate date={post.data.pubDate} />
-									<div class="flex flex-col">
-										<a class="dark:text-white font-bold" href={`/blog/${post.slug}/`}>{post.data.title}</a>
-										<a
-											class="overflow-hidden whitespace-nowrap text-ellipsis dark:text-gray-400 text-sm"
-											href={`/blog/${post.slug}/`}
-											title={description.toString()}
-										>
-											{post.data.description}
-										</a>
-									</div>
-									{post.data.image &&
-										<img class="object-contain" width={720} height={360} src={post.data.image} alt="" />
-									}
-								</li>
-							)
-						})}
-					</>
-				))}
-			</ul>
+			<Selector client:load listOfYears={listOfYears.reverse()} posts={posts} />
 		</section>
 	</BaseLayout>
 </DefaultLayout>
