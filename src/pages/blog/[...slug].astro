@@ -18,4 +18,73 @@ const { Content } = await post.render();
 <BlogPost {...post.data}>
 	<h1>{post.data.title}</h1>
 	<Content />
+	<div class="w-full flex flex-col justify-end items-end mt-12 text-white">
+		<span class="text-xs inline-block">Compartir</span>
+		<div class="flex share-list">
+			<a id='whatsapp' class="wp-h"><img src="https://img.icons8.com/material-rounded/24/000000/whatsapp--v1.png"/></a>
+			<a id='facebook' class='fb-h' ><img src="https://img.icons8.com/material-rounded/24/000000/facebook-new.png"/></a>
+			<a id='twitter' class='tw-h' ><img src="https://img.icons8.com/material-rounded/24/000000/twitter-squared.png"/></a>
+			<a id='linkedin' class='li-h' ><img src="https://img.icons8.com/material-rounded/24/000000/linkedin--v1.png"/></a>
+		</div>
+	</div>
 </BlogPost>
+
+<script>
+	const pageLink = window.location.href;
+	const pageTitle = String(document.title).replace(/\&/g, '%26');
+
+	const wpButton = document.getElementById('whatsapp');
+	const fbButton = document.getElementById('facebook');
+	const twButton = document.getElementById('twitter');
+	const lnButton = document.getElementById('linkedin');
+
+	if (wpButton) {
+		wpButton.addEventListener('click', () => {
+			window.open(`https://api.whatsapp.com/send?text=${pageLink}`)
+		})
+	}
+
+	if (fbButton) {
+		fbButton.addEventListener('click', () => {
+			window.open(`http://www.facebook.com/sharer.php?u=${pageLink}&quote=${pageTitle}`,'sharer','toolbar=0,status=0,width=626,height=436');
+		})
+	}
+
+	if (twButton) {
+		twButton.addEventListener('click', () => {
+			window.open(`https://twitter.com/intent/tweet?text=${pageTitle}&url=${pageLink}`,'sharer','toolbar=0,status=0,width=626,height=436');
+		})
+	}
+
+	if (lnButton) {
+		lnButton.addEventListener('click', () => {
+			window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${pageLink}`,'sharer','toolbar=0,status=0,width=626,height=436');
+		})
+	}
+</script>
+
+<style>
+	.share-list a {
+		border-radius: 100px;
+		width: 40px;
+		height: 40px;
+		padding: 7px;
+		margin: 10px;
+		cursor: pointer;
+		overflow: hidden;
+		display: flex;
+		align-items: color;
+		justify-content: center;
+		
+		img {
+			width: 100%;
+			height: 100%;
+			filter: invert(100%);
+		}
+	}
+
+	a.fb-h { background: #3B5998; }
+	a.tw-h { background: #00acee; }
+	a.li-h { background: #0077B5; }
+	a.wp-h { background: #69c060; }
+</style>
